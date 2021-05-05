@@ -73,7 +73,9 @@ body {
 }
 </style>
 
-<!-- .replace('&nbsp;', '') doesn't seem to be working -->
+<!-- .replace('&nbsp;', '') doesn't seem to be working for photo -->
+<!-- ord(row.message[0]) does not work as ord is not defined -->
+<!-- repr is not defined -->
 
 <h1>Display Messages</h1>
 <div class="flex flex-col">
@@ -81,9 +83,15 @@ body {
     {% set row = dict(zip(columns, r)) %}
     {% set photo = row.photo %} 
     {% set space = "&nbsp;" == row.photo %}
+    {% set message = row.message.replace("\ufffc", "") %}
     {% if photo and not space %}
     <div class="flex-row">
-        {{photo}}
+        {% if photo and not space %}
+            {{photo}}
+        {% endif %}
+        {% if message %}
+            <span>{{message}}</span>
+        {% endif %}
     </div>
     {% endif %}
     {% endfor %}
