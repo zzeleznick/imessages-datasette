@@ -49,7 +49,7 @@ validate_setup() {
 
 run_datasette() {
     set -x
-    datasette -p $port --crossdb --plugins-dir=plugins/ --metadata metadata.json $CHAT_DB "$ADDRESS_BOOK"
+    datasette -p $port --crossdb --plugins-dir=plugins/ --template-dir=templates/ --metadata metadata.json $CHAT_DB "$ADDRESS_BOOK"
 }
 
 
