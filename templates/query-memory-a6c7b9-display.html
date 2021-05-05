@@ -83,11 +83,11 @@ body {
 <div class="flex flex-col">
     {% for r in display_rows %}
     {% set row = dict(zip(columns, r)) %}
-    {% set photo = row.photo %} 
-    {% set space = "&nbsp;" == row.photo %}
+    {% set media_src = row.media_src %}
+    {% set space = "&nbsp;" == media_src %}
     {% set message = row.message.replace("\ufffc", "") %}
     <div class="flex-row">
-        {% if photo and not space %}
+        {% if media_src and not space %}
             <div class="grid grid-cols-2 pb-2">
                 <div class="col-photo pic_from_me-{{row.is_from_me}}">
                     <img src="{{row.media_src}}">
