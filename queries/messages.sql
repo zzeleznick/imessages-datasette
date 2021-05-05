@@ -22,7 +22,8 @@ GROUP BY
 attachments AS (
 select
     ROWID,
-    filename as img_src, 
+    filename as img_src,
+    '/-/media/photo/' || ROWID as media_src,
     json_object(
         'img_src', '/-/media/photo/' || ROWID,
         'width', '200'
@@ -44,6 +45,7 @@ SELECT
   ) as message_date,
   attachments.photo,
   attachments.img_src,
+  attachments.media_src,
   message.is_from_me AS is_from_me
 FROM
   [chat].[chat]

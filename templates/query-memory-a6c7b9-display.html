@@ -1,9 +1,8 @@
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <style type="text/css">
-/* See https://codepen.io/samuelkraft/pen/Farhl */
-/* replace  .from-me / .from-them 
-   with .is_from_me-1 / .is_from_me-0
-*/
+
+/* Main CSS Styles lifted https://codepen.io/samuelkraft/pen/Farhl */
+
 body {
     font-family: "Helvetica Neue", Helvetica, sans-serif;
     font-size: 20px;
@@ -15,7 +14,7 @@ body {
 }
 
 .col-message {
-    /* max-width: 255px; */
+    display: inline-flex;
     word-wrap: break-word;
     margin-bottom: 12px;
     line-height: 24px;
@@ -80,10 +79,6 @@ body {
 }
 </style>
 
-<!-- .replace('&nbsp;', '') doesn't seem to be working for photo -->
-<!-- ord(row.message[0]) does not work as ord is not defined -->
-<!-- repr is not defined -->
-
 <h1>Display Messages</h1>
 <div class="flex flex-col">
     {% for r in display_rows %}
@@ -95,7 +90,7 @@ body {
         {% if photo and not space %}
             <div class="grid grid-cols-2 pb-2">
                 <div class="col-photo pic_from_me-{{row.is_from_me}}">
-                    {{photo}}
+                    <img src="{{row.media_src}}">
                 </div>
                 <div class="spacer"></div>
             </div>
