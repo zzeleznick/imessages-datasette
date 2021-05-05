@@ -71,6 +71,13 @@ body {
     background-color: white;
     border-bottom-right-radius: 10px;
 }
+.pic_from_me-0 {
+    order: -9999;
+}
+
+.pic_from_me-1 {
+    order: 9999;
+}
 </style>
 
 <!-- .replace('&nbsp;', '') doesn't seem to be working for photo -->
@@ -85,12 +92,17 @@ body {
     {% set space = "&nbsp;" == row.photo %}
     {% set message = row.message.replace("\ufffc", "") %}
     {% if photo and not space %}
-    <div class="flex-row">
+    <div class="flex-row p-2">
         {% if photo and not space %}
-            {{photo}}
+            <div class="grid grid-cols-2 pb-2">
+                <div class="col-photo pic_from_me-{{row.is_from_me}}">
+                    {{photo}}
+                </div>
+                <div class="spacer"></div>
+            </div>
         {% endif %}
         {% if message %}
-            <span>{{message}}</span>
+            <div class="col-message is_from_me-{{row.is_from_me}}">{{message}}</div>
         {% endif %}
     </div>
     {% endif %}
