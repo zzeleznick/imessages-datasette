@@ -77,8 +77,10 @@ body {
 <div class="flex flex-col">
     {% for r in display_rows %}
     {% set row = dict(zip(columns, r)) %}
+    {% if row.photo %}
     <div class="flex-row">
-        <div class="col-message is_from_me-{{row.is_from_me}}">{{ row["message"] }}</div>
+        {{row.photo}}
     </div>
+    {% endif %}
     {% endfor %}
 <div>
