@@ -13,9 +13,17 @@ body {
     flex-direction: column;
 }
 
+/*
+  See https://css-tricks.com/snippets/css/prevent-long-urls-from-breaking-out-of-container/
+  for handling links
+*/
+
 .col-message {
     display: inline-flex;
+    overflow-wrap: break-word;
     word-wrap: break-word;
+    word-break: break-word;
+    max-width: 75%;
     margin-bottom: 12px;
     line-height: 24px;
     position: relative;
@@ -35,6 +43,7 @@ body {
     color: white;
     background: #0B93F6;
     align-self: flex-end;
+    float: right;
 }
 
 .is_from_me-1:before {
@@ -77,6 +86,19 @@ body {
 .pic_from_me-1 {
     order: 9999;
 }
+
+.single-emoji-1 {
+    font-size: xx-large;
+    background: transparent;
+    padding: 12px 0px;
+}
+.single-emoji-1:after {
+    background: transparent !important;
+}
+.single-emoji-1:before {
+    background: transparent !important;
+}
+
 </style>
 
 <h1>Display Messages</h1>
@@ -86,6 +108,7 @@ body {
     {% set media_src = row.media_src %}
     {% set space = "&nbsp;" == media_src %}
     {% set message = row.message.replace("\ufffc", "") %}
+    {% set single_emoji = message|length == 1 and not message.isascii() %}
     <div class="flex-row">
         {% if media_src and not space %}
             <div class="grid grid-cols-2 pb-2">
@@ -96,7 +119,9 @@ body {
             </div>
         {% endif %}
         {% if message %}
-            <div class="col-message is_from_me-{{row.is_from_me}}">{{message}}</div>
+            <div class="col-message single-emoji-{{single_emoji|int}} is_from_me-{{row.is_from_me}}">
+                {{message}}
+            </div>
         {% endif %}
     </div>
     {% endfor %}
