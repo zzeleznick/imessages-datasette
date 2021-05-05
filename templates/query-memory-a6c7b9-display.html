@@ -1,7 +1,15 @@
-<h1>Display Page</h1>
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+<style type="text/css">
 
-{% for row in display_rows %}
-    <div>
-       {{ row | pprint }}
+</style>
+
+<h1>Display Messages</h1>
+<div class="flex flex-col">
+    {% for row in display_rows %}
+    <div class="flex-row">
+        {% for column, td in zip(columns, row) %}
+            <div class="col-{{ column|to_css_class }}">{{ td }}</div>
+        {% endfor %}
     </div>
-{% endfor %}
+    {% endfor %}
+<div>
