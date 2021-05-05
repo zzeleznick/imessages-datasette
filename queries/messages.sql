@@ -71,3 +71,5 @@ AND message like '%' || :message || '%'
 AND message_date like '%' || :date || '%'
 ORDER BY
 raw_date asc
+LIMIT 1000
+OFFSET CAST(:offset AS int)

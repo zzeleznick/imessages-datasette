@@ -11,7 +11,7 @@ body {
 
 .chat {
     padding: 10px 50px;
-    margin-top: 60px;
+    margin: 60px auto;
 }
 
 /*
@@ -100,25 +100,46 @@ body {
     background: transparent !important;
 }
 
-.header {
+.message-to {
+    color: #9e9e9e;
+}
+
+.header, .footer {
     background: rgb(244, 244, 244);
     padding: 10px 20px;
     position: fixed;
     width: 100%;
-    top: 0;
     z-index: 9999;
+}
+
+.header {
+    top: 0;
     border-bottom: rgb(215, 215, 215) solid 2px;
 }
 
-.message-to {
-    color: #9e9e9e;
+.footer {
+    bottom: 0;
+    border-top: rgb(215, 215, 215) solid 2px;
+}
+
+.page-link {
+    width: -webkit-fill-available;
+    text-decoration: underline;
+    color: lightseagreen;
+    font-size: 16px;
+}
+
+.page-next {
+    float: right;
+    text-align: right;
 }
 
 
 </style>
 
 <div class="header">
-    <span class="message-to">To: </span>{{ named_parameter_values.phone }}
+    {% set phone = named_parameter_values.phone %}
+    <span class="message-to">To: </span>{{ phone }}
 </div>
 
 <div class="chat flex flex-col">
@@ -144,4 +165,32 @@ body {
         {% endif %}
     </div>
     {% endfor %}
-<div>
+</div>
+
+{% set offset = named_parameter_values.offset|int %}
+
+{% set has_nxt = display_rows|length == 1000 %}
+{% set nxt_offset = offset + 1000 %}
+{% set next_url = "/_memory/display?phone={}&offset={}".format(phone, nxt_offset) %}
+
+{% set has_prev = offset > 0 %}
+{% set prev_offset = [offset - 1000, 0]|max %}
+{% set prev_url = "/_memory/display?phone={}&offset={}".format(phone, prev_offset) %}
+
+{% if has_prev or has_nxt %}
+<div class="footer">
+    <div class="flex">
+        {% if has_prev %}
+        <div class="page-link page-prev">
+            <a href="{{ prev_url }}"> Prev Page </a>
+        </div>
+        {% endif %}
+
+        {% if has_nxt %}
+        <div class="page-link page-next">
+            <a href="{{ next_url }}"> Next Page </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
