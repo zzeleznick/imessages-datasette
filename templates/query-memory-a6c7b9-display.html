@@ -1,10 +1,75 @@
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <style type="text/css">
-.is_from_me-1 {
-    background: blue
+/* See https://codepen.io/samuelkraft/pen/Farhl */
+/* replace  .from-me / .from-them 
+   with .is_from_me-1 / .is_from_me-0
+*/
+body {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 20px;
+    font-weight: normal;
+    max-width: 450px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
 }
+
+.col-message {
+    /* max-width: 255px; */
+    word-wrap: break-word;
+    margin-bottom: 12px;
+    line-height: 24px;
+    position: relative;
+    padding: 10px 20px;
+    border-radius: 25px;
+}
+
+.col-message:before,
+.col-message:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: 25px;
+}
+
+.is_from_me-1 {
+    color: white;
+    background: #0B93F6;
+    align-self: flex-end;
+}
+
+.is_from_me-1:before {
+    right: -7px;
+    width: 20px;
+    background-color: #0B93F6;
+    border-bottom-left-radius: 16px 14px;
+}
+
+.is_from_me-1:after {
+    right: -26px;
+    width: 26px;
+    background-color: white;
+    border-bottom-left-radius: 10px;
+}
+
 .is_from_me-0 {
-    background: red
+    background: #E5E5EA;
+    color: black;
+    align-self: flex-start;
+}
+
+.is_from_me-0:before {
+    left: -7px;
+    width: 20px;
+    background-color: #E5E5EA;
+    border-bottom-right-radius: 16px 14px;
+}
+
+.is_from_me-0:after {
+    left: -26px;
+    width: 26px;
+    background-color: white;
+    border-bottom-right-radius: 10px;
 }
 </style>
 
