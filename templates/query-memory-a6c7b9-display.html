@@ -91,8 +91,7 @@ body {
     {% set photo = row.photo %} 
     {% set space = "&nbsp;" == row.photo %}
     {% set message = row.message.replace("\ufffc", "") %}
-    {% if photo and not space %}
-    <div class="flex-row p-2">
+    <div class="flex-row">
         {% if photo and not space %}
             <div class="grid grid-cols-2 pb-2">
                 <div class="col-photo pic_from_me-{{row.is_from_me}}">
@@ -105,6 +104,5 @@ body {
             <div class="col-message is_from_me-{{row.is_from_me}}">{{message}}</div>
         {% endif %}
     </div>
-    {% endif %}
     {% endfor %}
 <div>
