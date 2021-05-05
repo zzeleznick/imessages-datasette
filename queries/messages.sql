@@ -25,8 +25,8 @@ select
     filename as img_src,
     '/-/media/photo/' || ROWID as media_src,
     json_object(
-        'img_src', '/-/media/photo/' || ROWID,
-        'width', '200'
+      'img_src', '/-/media/photo/' || ROWID,
+      'width', '200'
     ) as photo
 from
     [chat].[attachment]
