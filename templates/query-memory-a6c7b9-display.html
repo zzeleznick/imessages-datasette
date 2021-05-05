@@ -1,15 +1,19 @@
 <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 <style type="text/css">
-
+.is_from_me-1 {
+    background: blue
+}
+.is_from_me-0 {
+    background: red
+}
 </style>
 
 <h1>Display Messages</h1>
 <div class="flex flex-col">
-    {% for row in display_rows %}
+    {% for r in display_rows %}
+    {% set row = dict(zip(columns, r)) %}
     <div class="flex-row">
-        {% for column, td in zip(columns, row) %}
-            <div class="col-{{ column|to_css_class }}">{{ td }}</div>
-        {% endfor %}
+        <div class="col-message is_from_me-{{row.is_from_me}}">{{ row["message"] }}</div>
     </div>
     {% endfor %}
 <div>
